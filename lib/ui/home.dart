@@ -13,16 +13,23 @@ class Home extends StatelessWidget {
       appBar: AppBar(title: Text('Ideas')),
       body: BlocBuilder<IdeaBloc, IdeaState>(
         builder: (context, state) {
-          final repository = RepositoryProvider.of<IdeaRepository>(context);
-          final ideas = repository.getList();
-          return ListView.builder(
-            itemCount: ideas.length,
-            itemBuilder: (context, index){
-              return GestureDetector(
-                onTap: () {Navigator.pushNamed(context, '/editor', arguments: ideas[index]);},
-                child:IdeaCard(idea:ideas[index]));
-            },
-          );
+          if (state is IdeaStateNotInitialized)
+            return Column(mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(child:CircularProgressIndicator())
+              ],);
+          else if (state is IdeaStateFetched){
+            final repository = RepositoryProvider.of<IdeaRepository>(context);
+            final ideas = repository.getList();
+            return ListView.builder(
+              itemCount: ideas.length,
+              itemBuilder: (context, index){
+                return GestureDetector(
+                  onTap: () {Navigator.pushNamed(context, '/editor', arguments: ideas[index]);},
+                  child:IdeaCard(idea:ideas[index]));
+              },
+            );
+          }
         }
       ),
       floatingActionButton: FloatingActionButton(
