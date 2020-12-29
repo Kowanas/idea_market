@@ -63,6 +63,8 @@ class IdeaCard extends StatelessWidget{
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Expanded(child:Text(idea.uid.toString()+'. '+idea.title,
+                    maxLines: 1,
+                    overflow: TextOverflow.clip,
                     style: TextStyle(fontWeight: FontWeight.bold,
                     fontStyle: FontStyle.italic))),
                   Text(DateFormat('yyyy-MM-dd').format(idea.created),
@@ -104,7 +106,10 @@ class IdeaCardShort extends StatelessWidget{
             style: TextStyle(fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.bold,
                 color: titleColor)),
-        Expanded(child:Text(text, style: TextStyle(color: Colors.blueGrey))),
+        Expanded(child:Text(text,
+            maxLines: 1,
+            overflow: TextOverflow.clip,
+            style: TextStyle(color: Colors.blueGrey))),
       ],);
   }
 }
