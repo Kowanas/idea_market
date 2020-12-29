@@ -38,7 +38,7 @@ class IdeaEditor extends StatelessWidget{
           height: MediaQuery.of(context).size.height - appbar.preferredSize.height*1.5,
           child: Column(
               children: <Widget>[
-                IdeaEditCard(title: 'Title', buf:title, flex: 1),
+                IdeaEditCard(title: 'Title', buf:title, flex: 2),
                 IdeaEditCard(title: 'As a', buf:role, flex: 3),
                 IdeaEditCard(title: 'I want', buf:goal, flex: 3),
                 IdeaEditCard(title: 'So that', buf:value, flex: 3),
@@ -47,41 +47,32 @@ class IdeaEditor extends StatelessWidget{
   }
 }
 
-class IdeaEditCard extends StatefulWidget {
+class IdeaEditCard extends StatelessWidget {
   final String title;
   final StringBuffer buf;
   final int flex;
-
-  const IdeaEditCard({Key key, this.title, this.buf, this.flex})
-     : super(key: key);
-  @override
-  State<StatefulWidget> createState() => IdeaEditCardState();
-}
-
-class IdeaEditCardState extends State<IdeaEditCard>{
   TextEditingController _controller;
 
-  @override
-  void initState() {
-    _controller = TextEditingController(text: widget.buf.toString());
+  IdeaEditCard({Key key, this.title, this.buf, this.flex})
+     : super(key: key){
+    _controller = TextEditingController(text: buf.toString());
     _controller.addListener(() {
-      widget.buf.clear();
-      widget.buf.write(_controller.text);
+      buf.clear();
+      buf.write(_controller.text);
     });
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: widget.flex,
+      flex: flex,
       child: Container(
         padding: EdgeInsets.all(10),
         child: TextField(
           maxLines: 100,
           decoration: InputDecoration(
             border: OutlineInputBorder(),
-            labelText: widget.title,
+            labelText: title,
           ),
           controller: _controller,
         )

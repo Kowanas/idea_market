@@ -37,7 +37,7 @@ class Home extends StatelessWidget {
 class IdeaCard extends StatelessWidget{
   final Idea idea;
 
-  const IdeaCard({Key key, this.idea}) : super(key: key);
+  IdeaCard({Key key, this.idea}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
