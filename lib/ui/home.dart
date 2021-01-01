@@ -25,7 +25,8 @@ class Home extends StatelessWidget {
               itemCount: ideas.length,
               itemBuilder: (context, index){
                 return GestureDetector(
-                  onTap: () {Navigator.pushNamed(context, '/editor', arguments: ideas[index]);},
+                  onTap: () {Navigator.pushNamed(context, '/editor',
+                      arguments: ideas[index]);},
                   child:IdeaCard(idea:ideas[index]));
               },
             );
@@ -35,7 +36,8 @@ class Home extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.red,
-        onPressed: () {Navigator.pushNamed(context, '/editor', arguments: RepositoryProvider.of<IdeaRepository>(context).getNew());},
+        onPressed: () {Navigator.pushNamed(context, '/editor',
+            arguments: RepositoryProvider.of<IdeaRepository>(context).getNew());},
       ),
     );
   }
