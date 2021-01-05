@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "13450533485",
+    "project_id": "ideas-market-f5bcd",
+    "storage_bucket": "ideas-market-f5bcd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13450533485:android:1a44b7bd1d60d11a157d64",
+        "android_client_info": {
+          "package_name": "com.kowanas.idea_market"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13450533485-d3m0p18nrc5j0qjg68vsnc1jladtpuvr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCY9F4P3LGn5jpwgRRQBb1TK6iP2GP4iTE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13450533485-d3m0p18nrc5j0qjg68vsnc1jladtpuvr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

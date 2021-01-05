@@ -9,7 +9,8 @@ class Idea{
   String value;
   DateTime created;
 
-  Idea(this.uid, this.created, {this.title = "", this.role = "", this.goal = "", this.value = ""});
+  Idea(this.uid, this.created,
+      {this.title = "", this.role = "", this.goal = "", this.value = ""});
 
   bool verify(){
     if (uid == null) return false;

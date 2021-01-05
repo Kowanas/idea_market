@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:idea_market/bloc/idea_bloc.dart';
 import 'package:idea_market/model/idea.dart';
+import 'package:idea_market/util/ads/ad_banner_container.dart';
 
 class IdeaEditor extends StatelessWidget{
   @override
@@ -31,19 +32,18 @@ class IdeaEditor extends StatelessWidget{
       ]
     );
 
-    return Scaffold(
-      appBar: appbar,
+    final height = MediaQuery.of(context).size.height-appbar.preferredSize.height*1.5;
+    return Scaffold(appBar: appbar,
       body: SingleChildScrollView(
-      child: Container(
-          height: MediaQuery.of(context).size.height - appbar.preferredSize.height*1.5,
-          child: Column(
-              children: <Widget>[
-                IdeaEditCard(title: 'Title', buf:title, flex: 2),
-                IdeaEditCard(title: 'As a', buf:role, flex: 3),
-                IdeaEditCard(title: 'I want', buf:goal, flex: 3),
-                IdeaEditCard(title: 'So that', buf:value, flex: 3),
-              ]
-          ))));
+        child:AdBannerContainer(
+          height: height,
+          child: Column(children: <Widget>[
+            IdeaEditCard(title: 'Title', buf:title, flex: 2),
+            IdeaEditCard(title: 'As a', buf:role, flex: 3),
+            IdeaEditCard(title: 'I want', buf:goal, flex: 3),
+            IdeaEditCard(title: 'So that', buf:value, flex: 3),
+          ])
+        )));
   }
 }
 

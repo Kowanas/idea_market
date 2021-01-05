@@ -8,6 +8,7 @@
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:screenOrientation="portrait"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
             <!-- Specifies an Android theme to apply to this Activity as soon as
@@ -37,8 +38,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <!-- Please enter your app id of admob-->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="[ADMOB_APP_ID]"/>
+            android:value="ca-app-pub-"/>
     </application>
 </manifest>

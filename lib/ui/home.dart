@@ -4,41 +4,48 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:idea_market/bloc/idea_bloc.dart';
 import 'package:idea_market/model/idea.dart';
 import 'package:idea_market/model/idea_repository.dart';
+import 'package:idea_market/util/ads/ad_banner_container.dart';
 import 'package:intl/intl.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
+    routeEditor(idea) async {
+      await Navigator.pushNamed(context, '/editor', arguments: idea);
+    }
+
+    final AppBar _appBar = AppBar(title: Text('Idea'),);
+
     return Scaffold(
-      appBar: AppBar(title: Text('Ideas')),
-      body: BlocBuilder<IdeaBloc, IdeaState>(
-        builder: (context, state) {
-          if (state is IdeaStateNotInitialized)
-            return Column(mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(child:CircularProgressIndicator())
-              ],);
-          else if (state is IdeaStateFetched){
-            final repository = RepositoryProvider.of<IdeaRepository>(context);
-            final ideas = repository.getList();
-            return ListView.builder(
-              itemCount: ideas.length,
-              itemBuilder: (context, index){
-                return GestureDetector(
-                  onTap: () {Navigator.pushNamed(context, '/editor',
-                      arguments: ideas[index]);},
-                  child:IdeaCard(idea:ideas[index]));
-              },
-            );
-          }
-        }
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        backgroundColor: Colors.red,
-        onPressed: () {Navigator.pushNamed(context, '/editor',
-            arguments: RepositoryProvider.of<IdeaRepository>(context).getNew());},
-      ),
+      appBar: _appBar,
+      body: AdBannerContainer(
+        child: Builder(
+          builder: (context){
+            return BlocBuilder<IdeaBloc, IdeaState>(
+              builder: (context, state) {
+                if (state is IdeaStateNotInitialized)
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(child:CircularProgressIndicator())],);
+                else if (state is IdeaStateFetched){
+                  final repository = RepositoryProvider.of<IdeaRepository>(context);
+                  final ideas = repository.getList();
+                  return ListView.builder(itemCount: ideas.length,
+                    itemBuilder: (context, index){
+                    return GestureDetector(
+                        onTap: () { routeEditor(ideas[index]);},
+                        child:IdeaCard(idea:ideas[index]));
+                    });
+                }});
+          })),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text('NEW', style: TextStyle(fontSize: 20)),
+        backgroundColor: Colors.orangeAccent,
+        onPressed: () {
+          routeEditor(RepositoryProvider.of<IdeaRepository>(context).getNew());
+          }),
     );
   }
 }
@@ -73,7 +80,8 @@ class IdeaCard extends StatelessWidget{
                     style: TextStyle(fontStyle: FontStyle.italic)),
                   PopupMenuButton(
                     onSelected: (select){
-                      BlocProvider.of<IdeaBloc>(context)..add(IdeaEventDeleting(idea));
+                      BlocProvider.of<IdeaBloc>(context)
+                        ..add(IdeaEventDeleting(idea));
                     },
                     itemBuilder: (context) => <PopupMenuEntry>[
                       const PopupMenuItem(value: 0,
@@ -81,9 +89,12 @@ class IdeaCard extends StatelessWidget{
                     ]
                   )
               ]),
-              IdeaCardShort(title: 'As a ', titleColor: Colors.red, text: idea.role),
-              IdeaCardShort(title: 'I want ', titleColor: Colors.green, text: idea.goal),
-              IdeaCardShort(title: 'So that ', titleColor: Colors.blue, text: idea.value)
+              IdeaCardShort(title: 'As a ',
+                  titleColor: Colors.red, text: idea.role),
+              IdeaCardShort(title: 'I want ',
+                  titleColor: Colors.green, text: idea.goal),
+              IdeaCardShort(title: 'So that ',
+                  titleColor: Colors.blue, text: idea.value)
           ],
         )
       )
@@ -96,7 +107,8 @@ class IdeaCardShort extends StatelessWidget{
   final titleColor;
   final text;
 
-  const IdeaCardShort({Key key, this.title, this.titleColor, this.text}) : super(key: key);
+  const IdeaCardShort({Key key, this.title, this.titleColor, this.text})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
