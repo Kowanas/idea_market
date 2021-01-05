@@ -41,6 +41,6 @@
         <!-- Please enter your app id of admob-->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-0000000000000000~0000000000"/>
+            android:value="ca-app-pub-3393411258858656~3972312096"/>
    </application>
 </manifest>
