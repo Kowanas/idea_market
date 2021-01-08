@@ -10,7 +10,7 @@ class AdBloc extends Bloc<AdEvent, AdState>{
   Stream<AdState> mapEventToState(event) async* {
     if (event is AdEventStartBannerBottom) {
       yield AdStateBannerBottomLoading();
-      adBannerInfo = AdBannerInfo(event.context, testAd: true);
+      adBannerInfo = AdBannerInfo(event.context, testAd: false);
       await adBannerInfo.start((){add(AdEventStartBannerBottomCompleted(event.context));});
     }else if (event is AdEventStartBannerBottomCompleted){
       yield AdStateBannerBottom(adBannerInfo.height);
