@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'ad_bloc.dart';
 
@@ -17,7 +18,7 @@ class AdBannerContainer extends StatelessWidget{
           if (state is AdStateBannerBottom)
             return Container(
               height: height,
-              padding: EdgeInsets.only(bottom: state.height.toDouble()),
+              margin: EdgeInsets.only(bottom: state.height.toDouble()),
               child: child);
           else return Container(height: height, child: child);
         }
