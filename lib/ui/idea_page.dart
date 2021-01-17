@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:idea_market/bloc/viewmode_bloc.dart';
 import 'package:idea_market/model/idea.dart';
-import 'package:idea_market/util/ui/kowanas_animated_switcher.dart';
+import 'package:idea_market/util/ui/kowanas_command_bar.dart';
 import 'package:idea_market/util/ui/kowanas_layout.dart';
 
 import 'idea_card_full.dart';
@@ -65,18 +65,20 @@ class IdeaPageState extends State<IdeaPage>{
           currentSize = _getSize(viewModeBloc.state);
         });
       },
-      child: BlocBuilder<ViewModeBloc, ViewModeState>(
-        builder: (context, state){
-          if (state is ViewModeStateMini)
-            return KowanasAnimatedSwitcher(
-                child:IdeaCardMini(idea:widget.idea, size: currentSize));
-          else if (state is ViewModeStateShort)
-            return KowanasAnimatedSwitcher(
-                child:IdeaCardShort(idea:widget.idea, size: currentSize));
-          else if (state is ViewModeStateFull)
-            return KowanasAnimatedSwitcher(
-                child:IdeaCardFull(idea:widget.idea, size: currentSize));
-        })
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          BlocBuilder<ViewModeBloc, ViewModeState>(
+              builder: (context, state){
+                if (state is ViewModeStateMini)
+                  return IdeaCardMini(idea:widget.idea, size: currentSize);
+                else if (state is ViewModeStateShort)
+                  return IdeaCardShort(idea:widget.idea, size: currentSize);
+                else if (state is ViewModeStateFull)
+                  return IdeaCardFull(idea:widget.idea, size: currentSize);
+              }),
+          KowanasCommandBar()
+        ],)
     );
   }
 }

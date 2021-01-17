@@ -53,22 +53,21 @@ class Home extends StatelessWidget {
                             onPressed: (){routeEditor(repository.getNew());},)));
                         else {
                           return BlocProvider<ViewModeBloc>(
-                            create: (_) => ViewModeBloc(),
-                            child: CarouselSlider.builder(
+                              create: (_) => ViewModeBloc(),
+                              child: CarouselSlider.builder(
                                 options: CarouselOptions(viewportFraction: 1.0,
                                   height: layoutInfo.fullLayoutHeight),
-                                itemCount: ideas.length,
-                                itemBuilder: (context, index) {
-                                  BlocProvider.of<ViewModeBloc>(context)
+                                  itemCount: ideas.length,
+                                  itemBuilder: (context, index) {
+                                    BlocProvider.of<ViewModeBloc>(context)
                                       .add(ViewModeEventInit());
-                                  return GestureDetector(
+                                    return GestureDetector(
                                       onTap: (){routeEditor(ideas[index]);},
                                       child:IdeaPage(idea:ideas[index]));
-                                },
-                              ));
+                                    },));
                         }
                       }});
               })),
-        ));
+      ));
   }
 }

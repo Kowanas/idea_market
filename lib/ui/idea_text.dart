@@ -22,7 +22,7 @@ class IdeaText extends StatelessWidget{
           child:Text(text,
             maxLines: maxlines,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: color, fontSize: fSize))),
+            style: TextStyle(color: Colors.black87, fontSize: fSize))),
       ],);
   }
 }

@@ -13,14 +13,15 @@ class IdeaCardMini extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     KowanasLayoutInfo layoutInfo = KowanasLayout.of(context);
-    return Column(children: [
-      KowanasCardsPage(height: layoutInfo.getHeight(size),
+    return Column(mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        KowanasCardsPage(height: layoutInfo.getHeight(size),
           paddingSize: layoutInfo.getWidth(5),
           child: Container(
               child: Padding(padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Column(children: [
                         IdeaTitle(title:idea.title),

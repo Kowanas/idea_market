@@ -15,15 +15,17 @@ class IdeaCardFull extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     KowanasLayoutInfo layoutInfo = KowanasLayout.of(context);
-    return Column(children: [
-      KowanasCardsPage(height: layoutInfo.getHeight(size),
-          paddingSize: layoutInfo.getWidth(5),
-          child: Container(
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          KowanasCardsPage(height: layoutInfo.getHeight(size),
+            paddingSize: layoutInfo.getWidth(5),
+            child: Container(
               child: Padding(padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Column(children: [
                           IdeaTitle(title:idea.title),
@@ -31,13 +33,13 @@ class IdeaCardFull extends StatelessWidget{
                         ]),
                         IdeaText(maxlines: 100, size: layoutInfo.largefont,
                           color: Colors.redAccent,
-                          text: 'As a '+idea.role+'\n'),
+                          text: ' As a '+idea.role),
                         IdeaText(maxlines: 100, size: layoutInfo.largefont,
                           color: Colors.blueGrey,
-                          text: 'I want '+idea.goal+'\n'),
+                          text: ' I want '+idea.goal),
                         IdeaText(maxlines: 100, size: layoutInfo.largefont,
                           color: Colors.blueAccent,
-                          text: 'So that '+idea.value+'\n')
+                          text: ' So that '+idea.value)
                     ],
                   ))
               )))]);

@@ -25,7 +25,7 @@ class IdeaEditor extends StatelessWidget{
 
     _back(){
       FocusScope.of(context).unfocus();
-      Timer(Duration(milliseconds: 500), (){Navigator.of(context).pop();});
+      Timer(Duration(milliseconds: 200), (){Navigator.of(context).pop();});
     }
 
     onSaveIdea(){
