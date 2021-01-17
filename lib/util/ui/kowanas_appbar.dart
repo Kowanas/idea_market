@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'kowanas_layout.dart';
-
 class KowanasAppBar extends AppBar {
   final MaterialColor color;
+  final leadingIcon;
+  final leadingOnTap;
   final String subject;
   final double rightgap;
   final double size;
   double height;
 
-  KowanasAppBar({Key key, @required this.color, @required this.subject,
+  KowanasAppBar({this.leadingIcon, this.leadingOnTap, Key key, @required this.color, @required this.subject,
     @required this.rightgap, @required this.size})
       : assert(color != null),
         assert(subject != null),
@@ -19,9 +19,10 @@ class KowanasAppBar extends AppBar {
           backgroundColor: Color(0x00000000),
           elevation: 0,
           centerTitle: true,
-          leading: Icon(Icons.menu, color: color, size: size),
+          leading: IconButton(icon:Icon(leadingIcon, size:size, color:color),
+              onPressed: leadingOnTap),
           title: SizedBox(height: size,
-              child: FittedBox(fit: BoxFit.fitHeight,
+              child: FittedBox(fit: BoxFit.scaleDown,
                 child:Text(subject,
                   style: TextStyle(color: color.shade900, fontSize: size)))),
           actions: []

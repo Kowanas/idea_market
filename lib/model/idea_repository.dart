@@ -44,7 +44,8 @@ class IdeaRepository{
     final SharedPreferences pref = await SharedPreferences.getInstance();
     var data = <String>[];
     _ideas.forEach((key, value) {
-      data.add(value.toJson());
+      if (value.verify()) data.add(value.toJson());
+      else _ideas.remove(value.uid);
     });
     await pref.setStringList(_datakey, data);
   }

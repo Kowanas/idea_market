@@ -6,7 +6,9 @@ import 'ad_bloc.dart';
 class AdBannerContainer extends StatelessWidget{
   final child;
   final height;
-  AdBannerContainer({Key key, @required this.child, this.height});
+  final adMargin;
+  AdBannerContainer({Key key, @required this.child, this.height,
+    this.adMargin = true});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,8 @@ class AdBannerContainer extends StatelessWidget{
           if (state is AdStateBannerBottom)
             return Container(
               height: height,
-              margin: EdgeInsets.only(bottom: state.height.toDouble()),
+              margin: EdgeInsets.only(
+                  bottom:(adMargin==true)?state.height.toDouble():0),
               child: child);
           else return Container(height: height, child: child);
         }

@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:idea_market/model/idea_repository.dart';
+import 'package:page_transition/page_transition.dart';
 
 import 'bloc/idea_bloc.dart';
+import 'model/idea.dart';
 import 'ui/home.dart';
 import 'ui/idea_editor.dart';
 import 'util/ads/ad_bloc.dart';
@@ -31,9 +33,17 @@ class MyApp extends StatelessWidget {
           create: (_) => AdBloc())
       ],
       child: MaterialApp(initialRoute: '/',
+        onGenerateRoute: (settings){
+          switch(settings.name) {
+            case '/editor':
+              return PageTransition(
+                child: IdeaEditor(idea: settings.arguments as Idea),
+                type: PageTransitionType.fade,
+                duration: Duration(milliseconds: 500));
+          }
+        },
         routes: {
           '/': (_) => Home(),
-          '/editor': (_) => IdeaEditor()
-        },));
+      }));
   }
 }

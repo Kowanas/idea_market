@@ -17,12 +17,10 @@ class KowanasLayoutInfo{
   var scaledWidth;
   var scaledHeight;
   var scaleFontSize;
-  final _defaultDPR = 3.5;
-  double scale;
+  final _defaultDPR = 3.5; // Nexus 6 default DPR
   var appBarSize = 0.0;
 
   KowanasLayoutInfo(this.mediaQueryData){
-    scale = _defaultDPR / mediaQueryData.devicePixelRatio;
     scaledWidth = mediaQueryData.size.width/100.0;
     scaledHeight = mediaQueryData.size.height/100.0;
     scaleFontSize = KowanasFont.defaultSize/mediaQueryData.textScaleFactor
@@ -44,6 +42,7 @@ class KowanasLayoutInfo{
 
   getWidth(percent) => scaledWidth*percent;
   getHeight(percent) => scaledHeight*percent;
+  getGlobalHeight(x) => x/scaledHeight;
 }
 
 class KowanasLayout extends InheritedWidget{
@@ -57,7 +56,7 @@ class KowanasLayout extends InheritedWidget{
   @override
   bool updateShouldNotify(KowanasLayout old) => data != old.data;
 
-  static KowanasLayout of(context){
-    return context.dependOnInheritedWidgetOfExactType<KowanasLayout>();
+  static KowanasLayoutInfo of(context){
+    return context.dependOnInheritedWidgetOfExactType<KowanasLayout>().data;
   }
 }
