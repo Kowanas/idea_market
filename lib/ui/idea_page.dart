@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:idea_market/bloc/viewmode_bloc.dart';
 import 'package:idea_market/model/idea.dart';
@@ -77,7 +78,11 @@ class IdeaPageState extends State<IdeaPage>{
                 else if (state is ViewModeStateFull)
                   return IdeaCardFull(idea:widget.idea, size: currentSize);
               }),
-          KowanasCommandBar()
+          KowanasCommandBar(command: {'add task': () => {}},
+            actions: [
+              IconButton(onPressed: (){},
+              icon: Icon(Icons.camera_alt, color: Colors.redAccent,),)
+            ])
         ],)
     );
   }
