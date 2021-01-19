@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:idea_market/bloc/viewmode_bloc.dart';
 import 'package:idea_market/model/idea.dart';
+import 'package:idea_market/util/ads/ad_bloc.dart';
 import 'package:idea_market/util/ui/kowanas_command_bar.dart';
 import 'package:idea_market/util/ui/kowanas_layout.dart';
 
@@ -48,6 +49,11 @@ class IdeaPageState extends State<IdeaPage>{
 
   @override
   Widget build(BuildContext context) {
+
+    routeCamera() async {
+      await Navigator.pushNamed(context, '/camera');
+    }
+
     KowanasLayoutInfo layoutInfo = KowanasLayout.of(context);
     var viewModeBloc = BlocProvider.of<ViewModeBloc>(context);
     return GestureDetector(
@@ -80,8 +86,17 @@ class IdeaPageState extends State<IdeaPage>{
               }),
           KowanasCommandBar(command: {'add task': () => {}},
             actions: [
-              IconButton(onPressed: (){},
-              icon: Icon(Icons.camera_alt, color: Colors.redAccent,),)
+              BlocBuilder<AdBloc, AdState>(
+                builder: (context, state) {
+                  return IconButton(
+                    onPressed: (){
+                      print('current state is '+state.toString());
+//                      if (state is AdStateNone || state is AdStateBannerBottom)
+                        routeCamera();
+                    },
+                    icon: Icon(Icons.camera_alt, color: Colors.redAccent,),);
+                }
+              ),
             ])
         ],)
     );

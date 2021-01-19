@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'ad_info.dart';
 
 typedef OnLoaded = void Function();
+typedef OnFailed = void Function();
 
 class AdBannerInfo{
   final context;
@@ -12,6 +13,7 @@ class AdBannerInfo{
   int height = 0;
   bool _isLoaded = false;
   OnLoaded _onLoaded;
+  OnFailed _onFailed;
 
   AdBannerInfo(this.context, {this.testAd = false}){
     _createAd();
@@ -45,18 +47,22 @@ class AdBannerInfo{
               height = newHeight;
             }
             _onLoaded();
+          }else if (event == MobileAdEvent.failedToLoad){
+            _onFailed();
           }
         });
   }
 
-  void start(onLoaded) {
+  void start(onLoaded, onFailed) {
+    _onLoaded = onLoaded;
+    _onFailed = onFailed;
     _ad.load();
     _ad.show();
-    _onLoaded = onLoaded;
   }
 
   stop() async {
+    if (_isLoaded == false) return;
     _reset();
-    await _ad.dispose();
+    await _ad?.dispose();
   }
 }

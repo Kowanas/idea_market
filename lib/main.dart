@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +12,16 @@ import 'model/idea.dart';
 import 'ui/home.dart';
 import 'ui/idea_editor.dart';
 import 'util/ads/ad_bloc.dart';
+import 'util/ui/kowanas_camera.dart';
+
+List<CameraDescription> cameras;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseAdMob.instance.initialize(appId: FirebaseAdMob.testAppId);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  cameras = await availableCameras();
   runApp(RepositoryProvider(create: (context) => IdeaRepository(),
       child: MyApp()));
 }
@@ -44,6 +49,7 @@ class MyApp extends StatelessWidget {
         },
         routes: {
           '/': (_) => Home(),
+          '/camera': (_) => KowanasCamera(cameras: cameras)
       }));
   }
 }

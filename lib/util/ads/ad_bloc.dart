@@ -11,9 +11,17 @@ class AdBloc extends Bloc<AdEvent, AdState>{
     if (event is AdEventStartBannerBottom) {
       yield AdStateBannerBottomLoading();
       adBannerInfo = AdBannerInfo(event.context, testAd: false);
-      await adBannerInfo.start((){add(AdEventStartBannerBottomCompleted(event.context));});
+      adBannerInfo.start(
+        (){add(AdEventStartBannerBottomCompleted(event.context));},
+        (){add(AdEventStopBannerBottom(event.context));}
+      );
     }else if (event is AdEventStartBannerBottomCompleted){
       yield AdStateBannerBottom(adBannerInfo.height);
+    }else if (event is AdEventStopBannerBottom){
+      await adBannerInfo.stop();
+      yield AdStatePaused();
+    }else if (event is AdEventResetBannerBottom){
+      yield AdStateNone();
     }
   }
 }
@@ -23,6 +31,7 @@ abstract class AdState {
   AdState({this.height = 0});
 }
 class AdStateNone extends AdState{}
+class AdStatePaused extends AdState{}
 class AdStateBannerBottomLoading extends AdState{}
 class AdStateBannerBottom extends AdState{
   AdStateBannerBottom(height) : super(height:height);
@@ -37,4 +46,10 @@ class AdEventStartBannerBottom extends AdEvent{
 }
 class AdEventStartBannerBottomCompleted extends AdEvent{
   AdEventStartBannerBottomCompleted(context) : super(context);
+}
+class AdEventStopBannerBottom extends AdEvent{
+  AdEventStopBannerBottom(context) : super(context);
+}
+class AdEventResetBannerBottom extends AdEvent{
+  AdEventResetBannerBottom() : super(null);
 }

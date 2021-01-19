@@ -16,7 +16,7 @@ class AdBannerContainer extends StatelessWidget{
     return BlocBuilder<AdBloc, AdState>(
         builder: (context, state){
           if (state is AdStateNone)
-            adBloc.add(AdEventStartBannerBottom(context));
+            adBloc..add(AdEventStartBannerBottom(context));
           if (state is AdStateBannerBottom)
             return Container(
               height: height,
