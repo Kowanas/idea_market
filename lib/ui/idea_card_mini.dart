@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:idea_market/model/idea.dart';
 import 'package:idea_market/util/ui/kowanas_cardspage.dart';
 import 'package:idea_market/util/ui/kowanas_layout.dart';
