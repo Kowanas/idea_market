@@ -31,11 +31,11 @@ class IdeaCardShort extends StatelessWidget{
                     IdeaInfo(idea:idea),
                   ]),
                   IdeaText(maxlines: 2, color: Colors.redAccent,
-                    text: ' As a '+idea.role),
+                    text: ' As a '+idea.role+','),
                   IdeaText(maxlines: 3, color: Colors.blueGrey,
-                    text: ' I want '+idea.goal),
+                    text: ' I want '+idea.goal+','),
                   IdeaText(maxlines: 5, color: Colors.blueAccent,
-                    text: ' So that '+idea.value)
+                    text: ' So that '+idea.value+'.')
                 ],
               )
             )))]);

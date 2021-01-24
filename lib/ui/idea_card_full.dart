@@ -34,13 +34,13 @@ class IdeaCardFull extends StatelessWidget{
                         ]),
                         IdeaText(maxlines: 100, size: layoutInfo.largefont,
                           color: Colors.redAccent,
-                          text: ' As a '+idea.role),
+                          text: ' As a '+idea.role+','),
                         IdeaText(maxlines: 100, size: layoutInfo.largefont,
                           color: Colors.blueGrey,
-                          text: ' I want '+idea.goal),
+                          text: ' I want '+idea.goal+','),
                         IdeaText(maxlines: 100, size: layoutInfo.largefont,
                           color: Colors.blueAccent,
-                          text: ' So that '+idea.value)
+                          text: ' So that '+idea.value+'.')
                     ],
                   ))
               )))]);

@@ -15,7 +15,7 @@ class IdeaTitle extends StatelessWidget{
         children: <Widget>[
           Expanded(child:Text(title,
               maxLines: 1,
-              overflow: TextOverflow.clip,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(fontWeight: FontWeight.bold,
                   fontSize: layoutInfo.h3font,
                   fontStyle: FontStyle.italic))),

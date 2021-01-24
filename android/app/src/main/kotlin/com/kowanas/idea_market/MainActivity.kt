@@ -2,7 +2,11 @@ package com.kowanas.idea_market
 
 import android.Manifest
 import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
+import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -24,7 +28,10 @@ class MainActivity: FlutterActivity() {
                         android.R.style.Theme_DeviceDefault_Light_Dialog)
                 builder.setTitle("Persmission is required")
                 builder.setMessage("You need to enable a strorage permission to capture camera")
-                builder.setPositiveButton("OK") { dialogInterface, i -> }
+                builder.setNegativeButton("Cancel") { dialog, which ->  }
+                builder.setPositiveButton("Go setting") { dialog, which ->
+                    goPermissionSetting()
+                }
                 builder.create().show()
                 return false;
             }
@@ -52,5 +59,12 @@ class MainActivity: FlutterActivity() {
             return arrayOf<String>(Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)
         return arrayOf<String>();
+    }
+
+    fun goPermissionSetting(){
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri: Uri = Uri.fromParts("package", packageName, null)
+        intent.data = uri
+        startActivity(intent)
     }
 }
