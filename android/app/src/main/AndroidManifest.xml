@@ -38,7 +38,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-        <!-- Please enter your app id of admob-->
+        <!-- Please enter your app id of admob instead of temporary id -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-0000000000000000~0000000000"/>

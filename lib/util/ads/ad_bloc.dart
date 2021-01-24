@@ -10,6 +10,8 @@ class AdBloc extends Bloc<AdEvent, AdState>{
   Stream<AdState> mapEventToState(event) async* {
     if (event is AdEventStartBannerBottom) {
       yield AdStateBannerBottomLoading();
+      // set testAd to false after set your ad id and app id
+      // which are contained in AndroidManifest.xml and ad_info.dart
       adBannerInfo = AdBannerInfo(event.context, testAd: true);
       await adBannerInfo.start((){add(AdEventStartBannerBottomCompleted(event.context));});
     }else if (event is AdEventStartBannerBottomCompleted){
