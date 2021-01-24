@@ -20,7 +20,7 @@ Future<void> main() async {
   await FirebaseAdMob.instance.initialize(appId: FirebaseAdMob.testAppId);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await KowanasPermission().requestPermission(KowanasPermission.STORAGE,
-      popup: true);
+      popup: false);
   runApp(RepositoryProvider(create: (context) => IdeaRepository(),
       child: MyApp()));
 }

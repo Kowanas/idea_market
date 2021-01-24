@@ -8,8 +8,8 @@ import 'idea_title.dart';
 
 class IdeaCardMini extends StatelessWidget{
   final Idea idea;
-  final size;
-  IdeaCardMini({Key key, this.idea, this.size}) : super(key: key);
+  final size = 15.0;
+  IdeaCardMini({Key key, this.idea}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

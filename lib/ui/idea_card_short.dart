@@ -10,9 +10,9 @@ import 'idea_title.dart';
 
 class IdeaCardShort extends StatelessWidget{
   final Idea idea;
-  final size;
+  final size = 40.0;
 
-  IdeaCardShort({Key key, this.idea, this.size}) : super(key: key);
+  IdeaCardShort({Key key, this.idea}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
