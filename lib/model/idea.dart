@@ -20,6 +20,10 @@ class Idea{
     return true;
   }
 
+  void setBackground(String path){
+    background = path;
+  }
+
   static Idea fromJson(String json){
     Map<String, dynamic> data = jsonDecode(json);
     Idea idea;

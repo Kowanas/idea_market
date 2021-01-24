@@ -10,7 +10,7 @@ import 'idea_title.dart';
 
 class IdeaCardShort extends StatelessWidget{
   final Idea idea;
-  final size = 40.0;
+  final size = 46.0;
 
   IdeaCardShort({Key key, this.idea}) : super(key: key);
 
