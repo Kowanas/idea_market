@@ -8,14 +8,20 @@ class Idea{
   String goal;
   String value;
   DateTime created;
+  String background;
 
   Idea(this.uid, this.created,
-      {this.title = "", this.role = "", this.goal = "", this.value = ""});
+      {this.title = "", this.role = "", this.goal = "", this.value = "",
+        this.background});
 
   bool verify(){
     if (uid == null) return false;
     if (created == null) return false;
     return true;
+  }
+
+  void setBackground(String path){
+    background = path;
   }
 
   static Idea fromJson(String json){
@@ -30,6 +36,7 @@ class Idea{
     idea.role = data['role'];
     idea.goal = data['goal'];
     idea.value = data['value'];
+    idea.background = data['background'];
     return idea;
   }
 
@@ -41,6 +48,7 @@ class Idea{
     data['goal'] = goal;
     data['value'] = value;
     data['created'] = created.toString();
+    data['background'] = background;
     return jsonEncode(data);
   }
 }
